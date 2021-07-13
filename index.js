@@ -4,6 +4,12 @@ const actions = {
     name: (element,name) =>
             element.appendChild(document.createTextNode(name)),
     
+    tasks: (element, task) => {
+        task.forEach((task) => element.appendChild(htmlTree(task)));
+        totalCost = 0;
+    },
+            
+
         
 };
 
