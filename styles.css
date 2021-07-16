@@ -1,0 +1,6 @@
+#buildHouse{
+    border: 1px solid black;
+}
+#buildHouse  div *{
+    margin-left: 25px;
+}

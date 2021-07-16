@@ -1,30 +1,30 @@
 const task = {
-    cost: 10,
     name: 'buildHouse',
+    cost: 10,
     tasks: [
         {
-            cost: 5,
             name: 'purchase material',
+            cost: 5,
             tasks: [
                 {
-                    cost: 10,
                     name: 'purchase cement',
+                    cost: 10,
                     tasks: [
                         {
-                            cost: 20,
                             name: "demo",
+                            cost: 20,
                             tasks: [
                                 {
-                                    cost: 5,
                                     name: "test",
+                                    cost: 5,
                                 }
                             ]
                         }
                     ]
                 },
                 {
-                    cost: 15,
                     name: 'purchase steel',
+                    cost: 15,
                 }
             ]
         },
