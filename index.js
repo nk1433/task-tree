@@ -13,11 +13,11 @@ const createElement = (tagName,content) => {
 }
 
 const actions = {
-    name: (element,task) =>
-            element.appendChild(createElement("span",task.name)),
+    name: (element,task) => 
+        element.children.push({tag: "span",text: task.name}),
     
     tasks: (element, task) => 
-        task.tasks.forEach((task) => element.appendChild(htmlTree(task))),
+        element.children = element.children.concat(task.tasks.map((item) => parser(item))),
             
     cost: (element, task)  => {
         let totalCost = 0;
@@ -25,29 +25,37 @@ const actions = {
         task.tasks?.forEach((task) => 
             task.cost && (totalCost += calculateCost(task))
         );
-        element.appendChild(createElement("span",totalCost));
+        element.children.push({tag: "span",text: totalCost});
     }
 };
 
 const keywords = Object.keys(actions);
 
-const htmlTree = (props) => {
-    const element = document.createElement(props.tag);
-    Object.keys(props).filter((key) => keywords.indexOf(key) !== -1)
-    .forEach((key) => actions[key](element, props));
+const parser = (task) => {
+    // const element = document.createElement(task.tag);
+    const element = {
+        tag: "div",
+        children: [
+            // {
+            //     tag: "span",
+            //     text: "buildHouse",
+            // },
+            // {
+            //     tag: "span",
+            //     text: "40"
+            // },
+            
+        ],
+    }
+    Object.keys(task).filter((key) => keywords.indexOf(key) !== -1)
+    .forEach((key) => actions[key](element, task));
     return element;
 };
 
 let parsedData = task;
 
-const appendTag = (task) => {
-    task.tag = "div";
-    task.tasks?.forEach((item) => appendTag(item));
-}
-
 const buildElements = () => {
-    appendTag(parsedData);
-    document.querySelector("#buildHouse").appendChild(htmlTree(parsedData));
+    document.querySelector("#buildHouse").appendChild(htmlTree(parser(parsedData)));
 };
 
 document.addEventListener("DOMContentLoaded",buildElements);
